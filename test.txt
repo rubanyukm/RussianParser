@@ -1,0 +1,72 @@
+def is_valid_sentence(phrase):
+            phrase = phrase.split()
+            # if a phrase has a preposition check if the prepositions comes before a noun or verb
+            adj = 0
+            noun = 0
+            verb = 0
+            preposition = 0
+            conjunction = 0
+            valid = False
+            if phrase == []:
+                valid = False
+            # check if the phrase has at least a noun and verb, noun and adjective, or verb and adjective
+            for word in phrase:
+                # check to see if the phrase has at least 1 noun and 1 verb or 1 noun and 1 adjective or 1 verb and 1 adjective
+                
+                # loop through the whole phrase and check if the phrase has at least 1 noun and 1 verb or 1 noun and 1 adjective or 1 verb and 1 adjective and update the counters 
+                if word in ln:
+                    noun += 1
+                elif word in lv:
+                    verb += 1
+                elif word in la:
+                    adj += 1
+                elif word in lp:
+                    preposition += 1
+                elif word in lc:
+                    conjunction += 1
+                
+                if noun >= 1 and verb >= 1:
+                    valid = True
+                elif noun >= 1 and adj >= 1:
+                    valid = True
+                elif verb >= 1 and adj >= 1:
+                    valid = True
+                elif noun >= 1 and adj >= 1 and verb >= 1:
+                    valid = True
+                else:
+                    valid = False
+                    break
+
+                # check if the phrase has a conjunction and if it does check if the conjunction comes before a noun, verb, or adjective
+                if word in lc:
+                    #check to see if the following word is a noun, verb, or adjective
+                    try:
+                        if phrase[phrase.index(word) + 1] in ln or phrase[phrase.index(word) + 1] in lv or phrase[phrase.index(word) + 1] in la:
+                            valid = True
+                        # if index is out of range set valid to False
+                        else:
+                            valid = False
+                            break
+                    except Exception:
+                        print("A conjunction must be follwed be either a noun, verb, or adjective. You can't string conjunctions")
+                        valid = False
+                        break
+
+                print(word)
+
+                # check if the phrase has a preposition and if it does check if the preposition comes before a noun or verb
+                if word in lp:
+                    #check to see if the following word is a noun, or verb
+                    try:
+                        if phrase[phrase.index(word) + 1] in ln or phrase[phrase.index(word) + 1] in lv or phrase[phrase.index(word) + 1] in la:
+                            valid = True
+                            break
+                        # if index is out of range set valid to False
+                        else:
+                            valid = False
+                            break
+                    except Exception:
+                        print("A preposition must be follwed be either a noun, verb, or adjective.")
+                        valid = False
+                        break
+            return valid
